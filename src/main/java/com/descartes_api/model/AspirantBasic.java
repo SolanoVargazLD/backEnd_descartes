@@ -12,7 +12,7 @@ public class AspirantBasic {
     private int id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "aspirant_id")
+    @JoinColumn(name = "aspirant_id", unique = true)
     private Aspirant aspirant;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

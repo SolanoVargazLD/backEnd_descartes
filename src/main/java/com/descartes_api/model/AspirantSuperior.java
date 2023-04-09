@@ -19,12 +19,12 @@ public class AspirantSuperior {
     @Column(name = "email", length = 100)
     private String email;
 
-   @OneToOne
-   @JoinColumn(name = "aspirante_id")
-   private Aspirant aspirant;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "aspirant_id", unique = true)
+    private Aspirant aspirant;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "level_higher_id", referencedColumnName = "id")
     private LevelHigher levelHigher;
 

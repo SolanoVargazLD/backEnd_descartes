@@ -20,7 +20,7 @@ public class AspirantBachillerate {
     private String email;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "aspirante_id")
+    @JoinColumn(name = "aspirant_id", unique = true)
     private Aspirant aspirant;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

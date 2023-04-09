@@ -19,15 +19,11 @@ public class AspirantPostgraduate {
     @Column(name = "phone", length = 10)
     private String phone;
 
-    /*@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "aspirant_id", nullable = false)
-    private Aspirant aspirant;*/
-
-    @OneToOne
-    @JoinColumn(name = "aspirante_id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aspirante_id", unique = true)
     private Aspirant aspirant;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "level_higher_id", referencedColumnName = "id")
     private LevelHigher levelHigher;
 
