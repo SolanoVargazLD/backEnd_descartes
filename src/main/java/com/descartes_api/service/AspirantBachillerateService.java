@@ -29,6 +29,10 @@ public class AspirantBachillerateService {
     }
 
     public AspirantBachillerate postAspirantBachillerate(AspirantBachillerate aspirantBachillerate){
+        Optional<AspirantBachillerate> aspirantOptional= aspirantBachillerateRepository.findByAspirantId(aspirantBachillerate.getAspirant().getId());
+        if (aspirantOptional.isPresent()) {
+            return null;
+        }
         return aspirantBachillerateRepository.save(aspirantBachillerate);
     }
 

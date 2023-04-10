@@ -2,8 +2,12 @@ package com.descartes_api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "father_tutor")
 public class FatherTutor {
     @Id
@@ -32,70 +36,5 @@ public class FatherTutor {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @JoinColumn(name = "aspirant_id", referencedColumnName = "id", nullable = false)
     private Aspirant aspirant;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastNameP() {
-        return lastNameP;
-    }
-
-    public void setLastNameP(String lastNameP) {
-        this.lastNameP = lastNameP;
-    }
-
-    public String getLastNameM() {
-        return lastNameM;
-    }
-
-    public void setLastNameM(String lastNameM) {
-        this.lastNameM = lastNameM;
-    }
-
-    public String getPhone1() {
-        return phone1;
-    }
-
-    public void setPhone1(String phone1) {
-        this.phone1 = phone1;
-    }
-
-    public String getPhone2() {
-        return phone2;
-    }
-
-    public void setPhone2(String phone2) {
-        this.phone2 = phone2;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Aspirant getAspirant() {
-        return aspirant;
-    }
-
-    public void setAspirant(Aspirant aspirant) {
-        this.aspirant = aspirant;
-    }
-
 
 }

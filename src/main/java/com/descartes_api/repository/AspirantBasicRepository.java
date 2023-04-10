@@ -4,6 +4,10 @@ import com.descartes_api.model.AspirantBasic;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface AspirantBasicRepository  extends JpaRepository<AspirantBasic, Integer> {
+    Optional<AspirantBasic> findByAspirantId(int aspirantId);
+
 }

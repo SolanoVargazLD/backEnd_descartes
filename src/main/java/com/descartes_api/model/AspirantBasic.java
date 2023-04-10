@@ -1,46 +1,29 @@
 package com.descartes_api.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "aspirant_basic")
+//@JsonIgnoreProperties({"aspirant", "levelBasic"})
 public class AspirantBasic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "aspirant_id", unique = true)
     private Aspirant aspirant;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "level_basic_id", referencedColumnName = "id")
     private LevelBasic levelBasic;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public Aspirant getAspirant() {
-        return aspirant;
-    }
-
-    public void setAspirant(Aspirant aspirant) {
-        this.aspirant = aspirant;
-    }
-
-    public LevelBasic getLevelBasic() {
-        return levelBasic;
-    }
-
-    public void setLevelBasic(LevelBasic levelBasic) {
-        this.levelBasic = levelBasic;
-    }
 }
 

@@ -1,12 +1,17 @@
 package com.descartes_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "level_upper_middle")
 public class LevelUpperMiddle {
 
@@ -24,59 +29,12 @@ public class LevelUpperMiddle {
     private String img;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "levelUpperMiddle")
-    private Set<AspirantBachillerate> aspirantBachillerates= new HashSet<>();
+    @JsonIgnore
+    private Set<AspirantBachillerate> aspirantBachillerates = new HashSet<>();
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @JoinColumn(name = "school_id",referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
     private School school;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public Set<AspirantBachillerate> getAspirantBachillerates() {
-        return aspirantBachillerates;
-    }
-
-    public void setAspiringBachillerates(Set<AspirantBachillerate> aspiringBachillerates) {
-        this.aspirantBachillerates = aspiringBachillerates;
-    }
 }
 

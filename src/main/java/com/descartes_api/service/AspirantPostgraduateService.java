@@ -29,6 +29,10 @@ public class AspirantPostgraduateService {
     }
 
     public AspirantPostgraduate saveAspirantPosgraduate(AspirantPostgraduate aspirantPostgraduate) {
+        Optional<AspirantPostgraduate> aspirantOptional= aspirantPostgraduateRepository.findByAspirantId(aspirantPostgraduate.getAspirant().getId());
+        if (aspirantOptional.isPresent()) {
+            return null;
+        }
         return aspirantPostgraduateRepository.save(aspirantPostgraduate);
     }
 

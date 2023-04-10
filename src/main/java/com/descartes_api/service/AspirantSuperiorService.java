@@ -1,5 +1,6 @@
 package com.descartes_api.service;
 
+import com.descartes_api.model.AspirantBasic;
 import com.descartes_api.model.AspirantSuperior;
 import com.descartes_api.repository.AspirantSuperiorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,10 @@ public class AspirantSuperiorService {
     }
 
     public AspirantSuperior saveAspirantSuperior(AspirantSuperior aspirantSuperior){
+        Optional<AspirantSuperior> aspirantOptional= aspirantSuperiorRepository.findByAspirantId(aspirantSuperior.getAspirant().getId());
+        if (aspirantOptional.isPresent()) {
+            return null;
+        }
         return aspirantSuperiorRepository.save(aspirantSuperior);
     }
 

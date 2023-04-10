@@ -2,10 +2,14 @@ package com.descartes_api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "administrative")
 public class Administrative {
 
@@ -38,68 +42,5 @@ public class Administrative {
     @JoinColumn(name = "school_id", referencedColumnName = "id", nullable = false)
     private School school;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastNameP() {
-        return lastNameP;
-    }
-
-    public void setLastNameP(String lastNameP) {
-        this.lastNameP = lastNameP;
-    }
-
-    public String getLastNameM() {
-        return lastNameM;
-    }
-
-    public void setLastNameM(String lastNameM) {
-        this.lastNameM = lastNameM;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public School getSchool() {
-        return school;
-    }
-
-    public void setSchool(School school) {
-        this.school = school;
-    }
-
-    public Roles getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Roles roles) {
-        this.roles = roles;
-    }
 }
 

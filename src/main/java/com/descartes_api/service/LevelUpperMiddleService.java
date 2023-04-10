@@ -2,6 +2,7 @@ package com.descartes_api.service;
 
 import com.descartes_api.model.LevelUpperMiddle;
 import com.descartes_api.repository.LevelUpperMiddleRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class LevelUpperMiddleService {
         levelUpperMiddle.setName(levelUpper.getName());
         levelUpperMiddle.setLevel(levelUpper.getLevel());
         levelUpperMiddle.setImg(levelUpper.getImg());
-        levelUpperMiddle.setAspiringBachillerates(levelUpper.getAspirantBachillerates());
+        levelUpperMiddle.setAspirantBachillerates(levelUpper.getAspirantBachillerates());
         levelUpperMiddle.setSchool(levelUpper.getSchool());
         levelUpperMiddleRepository.save(levelUpperMiddle);
         return ResponseEntity.noContent().build();

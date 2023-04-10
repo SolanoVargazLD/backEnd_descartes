@@ -33,7 +33,7 @@ public class AspirantPostgraduateController {
 
     @PutMapping("/aspirantPostgraduate/{id}")
     public ResponseEntity<AspirantPostgraduate> putAspirantPostgraduate(@RequestBody AspirantPostgraduate aspirantPostgraduate, @PathVariable Integer id) {
-        return aspirantPostgraduateService.deleteAspirantPosgraduate(id);
+        return aspirantPostgraduateService.putAspirantPosgraduate(aspirantPostgraduate,id);
     }
 
     @DeleteMapping("/aspirantPostgraduate/{id}")

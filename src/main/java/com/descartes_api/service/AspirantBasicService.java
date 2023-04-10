@@ -2,6 +2,7 @@ package com.descartes_api.service;
 
 import com.descartes_api.model.AspirantBasic;
 import com.descartes_api.repository.AspirantBasicRepository;
+import com.descartes_api.repository.AspirantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,8 @@ public class AspirantBasicService {
     @Autowired
     private AspirantBasicRepository aspirantBasicRepository;
 
+    @Autowired
+    private AspirantRepository aspirantRepository;
     public List<AspirantBasic> listAspirantBasic(){
         return aspirantBasicRepository.findAll();
     }
@@ -28,8 +31,12 @@ public class AspirantBasicService {
         }
     }
 
-    public AspirantBasic saveAspirantBasic(AspirantBasic aspirantBasic){
-        return aspirantBasicRepository.save(aspirantBasic);
+    public AspirantBasic saveAspirantBasic(AspirantBasic aspirantBasic)  {
+        Optional<AspirantBasic> aspirantOptional= aspirantBasicRepository.findByAspirantId(aspirantBasic.getAspirant().getId());
+        if (aspirantOptional.isPresent()) {
+            return null;
+        }
+            return aspirantBasicRepository.save(aspirantBasic);
     }
 
     public ResponseEntity<AspirantBasic> putAspirantBasic(AspirantBasic aspirantBasic, Integer id){
