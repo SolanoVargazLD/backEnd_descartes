@@ -25,6 +25,7 @@ public class School {
     private String keySchool;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
     private Set<LevelBasic> levelBasics = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "school", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -36,6 +37,7 @@ public class School {
     private Set<LevelUpperMiddle> levelUpperMiddles = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "school")
+    @JsonIgnore
     private Set<Administrative> administratives = new HashSet();
 
 }

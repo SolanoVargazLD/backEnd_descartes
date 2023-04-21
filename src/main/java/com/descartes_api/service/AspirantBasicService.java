@@ -22,6 +22,10 @@ public class AspirantBasicService {
         return aspirantBasicRepository.findAll();
     }
 
+    public List<?> listAspirantBasicCrud(){
+        return aspirantBasicRepository.findAspirantsWithBasicInfo();
+    }
+
     public ResponseEntity<AspirantBasic> listAspirantBasicId(Integer id){
         try{
             AspirantBasic aspirantBasic =aspirantBasicRepository.findById(id).get();

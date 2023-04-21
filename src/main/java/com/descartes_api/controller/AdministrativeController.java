@@ -1,19 +1,16 @@
 package com.descartes_api.controller;
 
 import com.descartes_api.model.Administrative;
-import com.descartes_api.model.Roles;
 import com.descartes_api.service.AdministrativeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/descartes")
 public class AdministrativeController {
     @Autowired

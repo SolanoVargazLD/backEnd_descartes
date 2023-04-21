@@ -10,33 +10,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/descartes")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/descartes/aspirantBasic")
 public class AspirantBasicController {
     @Autowired
     private AspirantBasicService aspirantBasicService;
 
-    @GetMapping("/aspirantBasic")
+    @GetMapping
     public List<AspirantBasic> getAspirantBasic(){
         return this.aspirantBasicService.listAspirantBasic();
     }
 
-    @GetMapping("/aspirantBasic/{id}")
+    @GetMapping("/crud")
+    public List<?> getAspirantBasicCrud(){
+        return this.aspirantBasicService.listAspirantBasicCrud();
+    }
+    @GetMapping("/{id}")
     public ResponseEntity<AspirantBasic> getAspirantBasicId(@PathVariable Integer id){
         return aspirantBasicService.listAspirantBasicId(id);
     }
 
-    @PostMapping("/aspirantBasic")
+    @PostMapping
     public ResponseEntity<AspirantBasic> postAspirantBasicId(@RequestBody AspirantBasic aspirantBasic){
         AspirantBasic aspirantBasicTemp = aspirantBasicService.saveAspirantBasic(aspirantBasic);
         return new ResponseEntity<>(aspirantBasicTemp, HttpStatus.CREATED);
     }
 
-    @PutMapping("/aspirantBasic/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<AspirantBasic> putAspirantBasicId(@RequestBody AspirantBasic aspirantBasic, @PathVariable Integer id){
         return aspirantBasicService.putAspirantBasic(aspirantBasic, id);
     }
 
-    @DeleteMapping("/aspirantBasic/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<AspirantBasic> deleteAspirantBasicId(@PathVariable Integer id){
         return aspirantBasicService.deleteAspirantBasic(id);
     }
