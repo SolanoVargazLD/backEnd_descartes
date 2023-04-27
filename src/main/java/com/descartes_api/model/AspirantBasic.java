@@ -4,13 +4,10 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Entity
 @Getter
 @Setter
 @Table(name = "aspirant_basic")
-//@JsonIgnoreProperties({"aspirant", "levelBasic"})
 public class AspirantBasic {
 
     @Id

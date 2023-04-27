@@ -12,11 +12,6 @@ import java.util.Optional;
 public interface AspirantBasicRepository  extends JpaRepository<AspirantBasic, Integer> {
     Optional<AspirantBasic> findByAspirantId(int aspirantId);
 
-//    @Query("SELECT ae.id, ae.name, ae.lastNameP, ae.lastNameM, ae.curp " +
-  //          "FROM Aspirant ae " +
-    //        "JOIN AspirantBasic ab ON ae.id = ab.levelBasic")
-    @Query("SELECT a.id, a.name, a.lastNameP, a.lastNameM, a.curp FROM AspirantBasic ab JOIN ab.aspirant a")
+    @Query("SELECT ab.id , a.id, a.tipoAspirant ,a.name, a.lastNameP, a.lastNameM, a.curp FROM AspirantBasic ab JOIN ab.aspirant a")
     List<Object[]> findAspirantsWithBasicInfo();
-
-
 }

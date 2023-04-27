@@ -23,7 +23,7 @@ public class AspirantPostgraduate {
     @Column(name = "phone", length = 10)
     private String phone;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "aspirante_id", unique = true)
     private Aspirant aspirant;
 

@@ -10,34 +10,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/descartes")
+@CrossOrigin(origins = "*")
+@RequestMapping("/api/descartes/aspirants")
 public class AspirantController {
 
     @Autowired
     private AspirantService aspirantService;
 
-    @GetMapping("/aspirants")
+    @GetMapping
     public List<Aspirant> getAllAspirants() {
         return aspirantService.listAspirant();
     }
 
-    @GetMapping("/aspirants/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Aspirant> getAspirantById(@PathVariable int id) {
         return aspirantService.listAspirantId(id);
     }
 
-    @PostMapping("/aspirants")
+    @PostMapping
     public ResponseEntity<Aspirant> createAspirant(@RequestBody Aspirant aspirant) {
         Aspirant savedAspirant = aspirantService.saveAspirant(aspirant);
         return new ResponseEntity<>(savedAspirant, HttpStatus.CREATED);
     }
 
-    @PutMapping("/aspirants/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Aspirant> updateAspirant(@PathVariable Integer id, @RequestBody Aspirant aspirant) {
         return aspirantService.putAspirant(aspirant, id);
     }
 
-    @DeleteMapping("/aspirants/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Aspirant> deleteAspirantById(@PathVariable Integer id) {
         return aspirantService.deleteAspirantId(id);
     }

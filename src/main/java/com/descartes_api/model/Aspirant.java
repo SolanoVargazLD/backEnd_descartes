@@ -18,6 +18,9 @@ public class Aspirant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "tipo_aspirant")
+    private char tipoAspirant;
+
     @Column(length = 75)
     private String name;
 
@@ -39,7 +42,7 @@ public class Aspirant {
     private char sex;
 
 
-    @OneToOne(mappedBy = "aspirant", fetch = FetchType.LAZY)
+    @OneToOne(cascade =  CascadeType.ALL, mappedBy = "aspirant", fetch = FetchType.LAZY)
     @JsonIgnore
     private AspirantBasic aspirantBasic;
 
@@ -55,7 +58,7 @@ public class Aspirant {
     @JsonIgnore
     private AspirantPostgraduate aspirantPostgraduate;
 
-    @OneToMany(cascade =  CascadeType.ALL, mappedBy = "aspirant", fetch = FetchType.EAGER)
+    @OneToMany( cascade =  CascadeType.ALL,mappedBy = "aspirant", fetch = FetchType.EAGER)
     private Set<FatherTutor> fatherTutor= new HashSet<>();
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

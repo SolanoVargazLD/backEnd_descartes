@@ -8,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AspirantBasicService {
@@ -23,7 +22,21 @@ public class AspirantBasicService {
     }
 
     public List<?> listAspirantBasicCrud(){
-        return aspirantBasicRepository.findAspirantsWithBasicInfo();
+        List<Object[]> aspirantBasicInfoList = aspirantBasicRepository.findAspirantsWithBasicInfo();
+        List<Map<String, Object>> aspirantBasicInfoMapList = new ArrayList<>();
+
+        for (Object[] row : aspirantBasicInfoList) {
+            Map<String, Object> aspirantBasicInfoMap = new HashMap<>();
+            aspirantBasicInfoMap.put("id_asp", row[0]);
+            aspirantBasicInfoMap.put("id", row[1]);
+            aspirantBasicInfoMap.put("tip_asp", row[2]);
+            aspirantBasicInfoMap.put("name", row[3]);
+            aspirantBasicInfoMap.put("lastNameP", row[4]);
+            aspirantBasicInfoMap.put("lastNameM", row[5]);
+            aspirantBasicInfoMap.put("curp", row[6]);
+            aspirantBasicInfoMapList.add(aspirantBasicInfoMap);
+        }
+        return aspirantBasicInfoMapList;
     }
 
     public ResponseEntity<AspirantBasic> listAspirantBasicId(Integer id){
