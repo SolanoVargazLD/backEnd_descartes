@@ -68,12 +68,21 @@ public class AspirantService {
         return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<Aspirant> deleteAspirantId(Integer id) {
+    public boolean deleteAspirantId(Integer id) {
+        Optional<Aspirant> aspirantOptional = aspirantRepository.findById(id);
+        if (!aspirantOptional.isPresent()) {
+            return false;
+        }
+        aspirantRepository.deleteById(aspirantOptional.get().getId());
+        return true;
+    }
+
+    /* public ResponseEntity<Aspirant> deleteAspirantId(Integer id) {
         Optional<Aspirant> aspirantOptional = aspirantRepository.findById(id);
         if (!aspirantOptional.isPresent()) {
             return ResponseEntity.unprocessableEntity().build();
         }
         aspirantRepository.deleteById(aspirantOptional.get().getId());
         return ResponseEntity.noContent().build();
-    }
+    } */
 }

@@ -7,8 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AspirantBachillerateService {
@@ -36,19 +35,37 @@ public class AspirantBachillerateService {
         return aspirantBachillerateRepository.save(aspirantBachillerate);
     }
 
-    public ResponseEntity<AspirantBachillerate> putAspirantBachillerate(AspirantBachillerate aspirantBachillerate, Integer id){
+    public List<?> listAspirantBaachillerateM(){
+        List<Object[]> aspirantBachillerateInfoList = aspirantBachillerateRepository.findAspirantsWithBachillerateInfo();
+        List<Map<String, Object>> aspirantBachillerateInfoMapList = new ArrayList<>();
+
+        for (Object[] row : aspirantBachillerateInfoList) {
+            Map<String, Object> aspirantBachillerateInfoMap = new HashMap<>();
+            aspirantBachillerateInfoMap.put("id_bachillerate", row[0]);
+            aspirantBachillerateInfoMap.put("id_asp", row[1]);
+            aspirantBachillerateInfoMap.put("tip_asp", row[2]);
+            aspirantBachillerateInfoMap.put("name", row[3]);
+            aspirantBachillerateInfoMap.put("lastNameP", row[4]);
+            aspirantBachillerateInfoMap.put("lastNameM", row[5]);
+            aspirantBachillerateInfoMap.put("curp", row[6]);
+            aspirantBachillerateInfoMapList.add(aspirantBachillerateInfoMap);
+        }
+        return aspirantBachillerateInfoMapList;
+    }
+
+    public boolean putAspirantBachillerate(AspirantBachillerate aspirantBachillerate, Integer id){
         Optional<AspirantBachillerate> aspirantBachillerateOptional= aspirantBachillerateRepository.findById(id);
         if (!aspirantBachillerateOptional.isPresent()){
-            return ResponseEntity.unprocessableEntity().build();
+            return false;
         }
         AspirantBachillerate aspirantBachillerateTemp= aspirantBachillerateOptional.get();
         aspirantBachillerateTemp.setSchoolOrigin(aspirantBachillerate.getSchoolOrigin());
         aspirantBachillerateTemp.setPhone(aspirantBachillerate.getPhone());
         aspirantBachillerateTemp.setEmail(aspirantBachillerate.getEmail());
-        aspirantBachillerateTemp.setAspirant(aspirantBachillerate.getAspirant());
-        aspirantBachillerateTemp.setLevelUpperMiddle(aspirantBachillerate.getLevelUpperMiddle());
+        /*aspirantBachillerateTemp.setAspirant(aspirantBachillerate.getAspirant());
+        aspirantBachillerateTemp.setLevelUpperMiddle(aspirantBachillerate.getLevelUpperMiddle());*/
         aspirantBachillerateRepository.save(aspirantBachillerateTemp);
-        return ResponseEntity.noContent().build();
+        return true;
     }
 
     public  ResponseEntity<AspirantBachillerate> deleteAspirantBachillerate(Integer id){

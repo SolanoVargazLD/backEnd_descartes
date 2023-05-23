@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping("/api/descartes/aspirantBasic")
 public class AspirantBasicController {
     @Autowired
@@ -21,10 +21,21 @@ public class AspirantBasicController {
         return this.aspirantBasicService.listAspirantBasic();
     }
 
-    @GetMapping("/crud")
-    public List<?> getAspirantBasicCrud(){
-        return this.aspirantBasicService.listAspirantBasicCrud();
+    @GetMapping("/listPreescolar")
+    public List<?> getAspirantBasicPreescolar(){
+        return this.aspirantBasicService.listAspirantBasicPreescolar();
     }
+
+    @GetMapping("/listPrimaria")
+    public List<?> getAspirantBasicPrimaria(){
+        return this.aspirantBasicService.listAspirantBasicPrimaria();
+    }
+
+    @GetMapping("/listSecundaria")
+    public List<?> getAspirantBasicSecundaria(){
+        return this.aspirantBasicService.listAspirantBasicSecundaria();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<AspirantBasic> getAspirantBasicId(@PathVariable Integer id){
         return aspirantBasicService.listAspirantBasicId(id);

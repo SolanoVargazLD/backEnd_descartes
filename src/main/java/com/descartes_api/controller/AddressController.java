@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/descartes")
+@CrossOrigin
 public class AddressController {
     @Autowired
     private AddressService addressService;

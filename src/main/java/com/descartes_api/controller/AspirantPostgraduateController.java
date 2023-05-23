@@ -10,33 +10,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/descartes")
+@CrossOrigin
+@RequestMapping("/api/descartes/aspirantPostgraduate")
 public class AspirantPostgraduateController {
     @Autowired
     private AspirantPostgraduateService aspirantPostgraduateService;
 
-    @GetMapping("/aspirantPostgraduate")
+    @GetMapping
     public List<AspirantPostgraduate> getAspirantPostgraduate() {
         return aspirantPostgraduateService.listAspirantPostgraduate();
     }
 
-    @GetMapping("/aspirantPostgraduate/{id}")
+    @GetMapping("/especific")
+    public List<?> findAspirantsByLevelHigherNameCareer(@RequestParam("nameCareer") String nameCareer, @RequestParam("nivelEducativo") String nivelEducativo) {
+        return aspirantPostgraduateService.findAspirantsByLevelHigherNameCareer(nameCareer, nivelEducativo);
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<AspirantPostgraduate> getAspirantPostgraduateId(@PathVariable Integer id) {
         return aspirantPostgraduateService.listAspirantPostgraduateId(id);
     }
 
-    @PostMapping("/aspirantPostgraduate")
+    @PostMapping
     public ResponseEntity<AspirantPostgraduate> postAspirantPostgraduate(@RequestBody AspirantPostgraduate aspirantPostgraduate){
         AspirantPostgraduate aspirantPostgraduateTemp= aspirantPostgraduateService.saveAspirantPosgraduate(aspirantPostgraduate);
         return new ResponseEntity<>(aspirantPostgraduateTemp, HttpStatus.CREATED);
     }
 
-    @PutMapping("/aspirantPostgraduate/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<AspirantPostgraduate> putAspirantPostgraduate(@RequestBody AspirantPostgraduate aspirantPostgraduate, @PathVariable Integer id) {
         return aspirantPostgraduateService.putAspirantPosgraduate(aspirantPostgraduate,id);
     }
 
-    @DeleteMapping("/aspirantPostgraduate/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<AspirantPostgraduate> deleteAspirant(@PathVariable Integer id) {
         return aspirantPostgraduateService.deleteAspirantPosgraduate(id);
     }

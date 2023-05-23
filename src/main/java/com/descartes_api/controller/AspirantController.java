@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/descartes/aspirants")
+@RequestMapping
 public class AspirantController {
 
     @Autowired
@@ -28,9 +28,9 @@ public class AspirantController {
     }
 
     @PostMapping
-    public ResponseEntity<Aspirant> createAspirant(@RequestBody Aspirant aspirant) {
+    public ResponseEntity<Integer> createAspirant(@RequestBody Aspirant aspirant) {
         Aspirant savedAspirant = aspirantService.saveAspirant(aspirant);
-        return new ResponseEntity<>(savedAspirant, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedAspirant.getId(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -39,7 +39,13 @@ public class AspirantController {
     }
 
     @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deleteAspirantById(@PathVariable Integer id) {
+        boolean deleted = aspirantService.deleteAspirantId(id);
+        return ResponseEntity.ok(deleted);
+    }
+
+    /* @DeleteMapping("/{id}")
     public ResponseEntity<Aspirant> deleteAspirantById(@PathVariable Integer id) {
         return aspirantService.deleteAspirantId(id);
-    }
+    } */
 }

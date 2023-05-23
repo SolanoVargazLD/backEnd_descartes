@@ -10,33 +10,44 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/descartes")
+@CrossOrigin
+@RequestMapping("/api/descartes/levelHigher")
 public class LeveHigherController {
     @Autowired
     private LevelHigherService levelHigherService;
 
-    @GetMapping("/levelHigher")
+    @GetMapping
     public List<LevelHigher> getLevelHigher(){
         return levelHigherService.listLevelHigher();
     }
 
-    @GetMapping("/levelHigher/{id}")
+    @GetMapping("/listLicenciature")
+    public List<?> getLevelHigherLicenciature(){
+        return levelHigherService.listLicenciatures();
+    }
+
+    @GetMapping("/postgraduate")
+    public List<?> getLevelHigherPostgraduate(@RequestParam("nivelEducativePosgrado") String nivelEducativePosgrado){
+        return levelHigherService.listPostgraduate(nivelEducativePosgrado);
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<LevelHigher> getLevelHigherId(@PathVariable Integer id){
         return levelHigherService.listLevelHigherID(id);
     }
 
-    @PostMapping("/levelHigher")
+    @PostMapping
     public ResponseEntity<LevelHigher> postLevelHigher(@RequestBody LevelHigher levelHigher){
         LevelHigher levelHigherSave = levelHigherService.saveLevelHigher(levelHigher);
         return new ResponseEntity<>(levelHigherSave, HttpStatus.CREATED);
     }
 
-    @PutMapping("/levelHigher/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<LevelHigher> putLevelHigher(@RequestBody LevelHigher levelHigher, @PathVariable Integer id){
         return levelHigherService.putLevelHigher(levelHigher, id);
     }
 
-    @DeleteMapping("/levelHigher/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<LevelHigher> deleteLevelHigher(@PathVariable Integer id){
         return levelHigherService.deleteLevelHigher(id);
     }

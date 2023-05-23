@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/descartes")
 public class AspirantSuperiosController {
     @Autowired
@@ -24,6 +25,12 @@ public class AspirantSuperiosController {
     public ResponseEntity<AspirantSuperior> getAspirantSuperiorId(@PathVariable Integer id){
         return this.aspirantSuperiorService.listAspirantSuperiorId(id);
     }
+
+    @GetMapping("/aspirantSuperior/licenciatura/{nameCareer}")
+    public List<?> getAspirantsByNivelEducativoAndNameCareer(@PathVariable String nameCareer) {
+        return aspirantSuperiorService.findAspirantsByLevelHigherNameCareer(nameCareer);
+    }
+
 
     @PostMapping("/aspirantSuperior")
     public ResponseEntity<AspirantSuperior> postAspirantSuperior(@RequestBody AspirantSuperior aspirantSuperior){

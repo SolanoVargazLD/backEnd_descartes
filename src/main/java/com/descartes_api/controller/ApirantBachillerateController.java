@@ -10,33 +10,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/descartes")
+@CrossOrigin
+@RequestMapping("/api/descartes/aspirantBachillerate")
 public class ApirantBachillerateController {
     @Autowired
     private AspirantBachillerateService aspirantBachillerateService;
 
-    @GetMapping("/aspirantBachillerate")
+    @GetMapping
     public List<AspirantBachillerate> getAspirantBachillerate(){
         return aspirantBachillerateService.listAspirantBachillerates();
     }
 
-    @GetMapping("/aspirantBachillerate/{id}")
+    @GetMapping("/listBachillerate")
+    public List<?> getListAspirantBachillerate(){
+        return this.aspirantBachillerateService.listAspirantBaachillerateM();
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<AspirantBachillerate> getAspirantBachillerateId(@PathVariable Integer id){
         return aspirantBachillerateService.listAspirantBachillerateId(id);
     }
 
-    @PostMapping("/aspirantBachillerate")
+    @PostMapping
     public ResponseEntity<AspirantBachillerate> postAspirantBachillerate(@RequestBody AspirantBachillerate aspirantBachillerate){
         AspirantBachillerate aspirantBachillerateTemp= aspirantBachillerateService.postAspirantBachillerate(aspirantBachillerate);
         return new ResponseEntity<>(aspirantBachillerateTemp, HttpStatus.CREATED);
     }
 
-    @PutMapping("/aspirantBachillerate/{id}")
-    public  ResponseEntity<AspirantBachillerate> putAspirantBachillerateId(@RequestBody AspirantBachillerate aspirantBachillerate,@PathVariable Integer id ){
+    @PutMapping("/{id}")
+    public  boolean putAspirantBachillerateId(@RequestBody AspirantBachillerate aspirantBachillerate,@PathVariable Integer id ){
         return aspirantBachillerateService.putAspirantBachillerate(aspirantBachillerate,id);
     }
 
-    @DeleteMapping("/aspirantBachillerate/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<AspirantBachillerate> deleteAspirantBachillerateId(@PathVariable Integer id){
         return  aspirantBachillerateService.deleteAspirantBachillerate(id);
     }

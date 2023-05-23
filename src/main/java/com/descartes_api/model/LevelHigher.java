@@ -25,6 +25,9 @@ public class LevelHigher {
     @Column(name = "key_career", length = 20)
     private String keyCareer;
 
+    @Column(name = "nivel_educative", length = 20)
+    private String nivelEducativo;
+
     @Column(name = "img")
     private String img;
 

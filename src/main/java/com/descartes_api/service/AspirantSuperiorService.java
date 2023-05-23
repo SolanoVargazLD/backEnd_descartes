@@ -8,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AspirantSuperiorService {
@@ -29,6 +28,24 @@ public class AspirantSuperiorService {
         }
     }
 
+    public List<?> findAspirantsByLevelHigherNameCareer(String nameCareer) {
+        List<Object[]> aspirantSuperiorInfoList = aspirantSuperiorRepository.findAspirantsByLevelHigherNameCareer(nameCareer);
+        List<Map<String, Object>> aspirantSuperiorInfoMapList = new ArrayList<>();
+
+        for (Object[] row : aspirantSuperiorInfoList) {
+            Map<String, Object> aspirantSuperioriInfoMap = new HashMap<>();
+            aspirantSuperioriInfoMap.put("id_asp_licenciature", row[0]);
+            aspirantSuperioriInfoMap.put("id_asp", row[1]);
+            aspirantSuperioriInfoMap.put("tip_asp", row[2]);
+            aspirantSuperioriInfoMap.put("name", row[3]);
+            aspirantSuperioriInfoMap.put("lastNameP", row[4]);
+            aspirantSuperioriInfoMap.put("lastNameM", row[5]);
+            aspirantSuperioriInfoMap.put("curp", row[6]);
+            aspirantSuperiorInfoMapList.add(aspirantSuperioriInfoMap);
+        }
+        return aspirantSuperiorInfoMapList;
+    }
+
     public AspirantSuperior saveAspirantSuperior(AspirantSuperior aspirantSuperior){
         Optional<AspirantSuperior> aspirantOptional= aspirantSuperiorRepository.findByAspirantId(aspirantSuperior.getAspirant().getId());
         if (aspirantOptional.isPresent()) {
@@ -46,8 +63,8 @@ public class AspirantSuperiorService {
         aspirantSuperiorTemp.setSchoolOrigin(aspirantSuperior.getSchoolOrigin());
         aspirantSuperiorTemp.setPhone(aspirantSuperior.getPhone());
         aspirantSuperiorTemp.setEmail(aspirantSuperior.getEmail());
-        aspirantSuperiorTemp.setLevelHigher(aspirantSuperior.getLevelHigher());
-        aspirantSuperiorTemp.setAspirant(aspirantSuperior.getAspirant());
+        /*aspirantSuperiorTemp.setLevelHigher(aspirantSuperior.getLevelHigher());
+        aspirantSuperiorTemp.setAspirant(aspirantSuperior.getAspirant());*/
         aspirantSuperiorRepository.save(aspirantSuperiorTemp);
         return ResponseEntity.noContent().build();
     }

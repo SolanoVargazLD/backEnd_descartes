@@ -1,5 +1,7 @@
 package com.descartes_api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +25,7 @@ public class AspirantBachillerate {
     @Column(name = "email", length = 100)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
+    @OneToOne( fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "aspirant_id", unique = true)
     private Aspirant aspirant;
 

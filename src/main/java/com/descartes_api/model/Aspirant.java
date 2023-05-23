@@ -46,15 +46,15 @@ public class Aspirant {
     @JsonIgnore
     private AspirantBasic aspirantBasic;
 
-    @OneToOne(mappedBy = "aspirant", fetch = FetchType.LAZY)
+    @OneToOne(cascade =  CascadeType.ALL, mappedBy = "aspirant", fetch = FetchType.LAZY)
     @JsonIgnore
     private AspirantBachillerate aspirantBachillerate;
 
-    @OneToOne(mappedBy = "aspirant", fetch = FetchType.LAZY)
+    @OneToOne(cascade =  CascadeType.ALL, mappedBy = "aspirant", fetch = FetchType.LAZY)
     @JsonIgnore
     private AspirantSuperior aspirantSuperior;
 
-    @OneToOne(mappedBy = "aspirant", fetch = FetchType.LAZY)
+    @OneToOne(cascade =  CascadeType.ALL, mappedBy = "aspirant", fetch = FetchType.LAZY)
     @JsonIgnore
     private AspirantPostgraduate aspirantPostgraduate;
 

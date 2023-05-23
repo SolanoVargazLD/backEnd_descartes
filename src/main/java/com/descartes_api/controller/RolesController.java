@@ -14,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/descartes")
+@CrossOrigin
 public class RolesController {
 
     @Autowired
