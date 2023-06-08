@@ -50,12 +50,12 @@ public class AdministrativeService {
          return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<Administrative> deleteAdministrativeId(Integer id){
+    public boolean deleteAdministrativeId(Integer id){
         Optional<Administrative> administrativeOptional= administrativeRepository.findById(id);
         if(!administrativeOptional.isPresent()){
-            return ResponseEntity.unprocessableEntity().build();
+            return false;
         }
         administrativeRepository.deleteById(administrativeOptional.get().getId());
-        return ResponseEntity.noContent().build();
+        return true;
     }
 }

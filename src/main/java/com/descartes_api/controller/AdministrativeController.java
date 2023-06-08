@@ -36,7 +36,8 @@ public class AdministrativeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Administrative> deleteAdministrative(@PathVariable Integer id){
-        return administrativeService.deleteAdministrativeId(id);
+    public ResponseEntity<Boolean> deleteAdministrative(@PathVariable Integer id){
+        boolean deleted = administrativeService.deleteAdministrativeId(id);
+        return ResponseEntity.ok(deleted);
     }
 }

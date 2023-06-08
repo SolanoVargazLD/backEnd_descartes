@@ -16,4 +16,6 @@ public interface AspirantPostgraduateRepository extends JpaRepository<AspirantPo
     @Query("SELECT s.id, a.id, a.tipoAspirant, a.name, a.lastNameP, a.lastNameP, s.professionalLicense FROM Aspirant a JOIN a.aspirantPostgraduate s JOIN s.levelHigher lh WHERE lh.nivelEducativo = :nivelEducativo AND lh.nameCareer = :nameCareer")
     List<Object[]> findAspirantsByLevelHigherNameCareerPosgraduate(@Param("nameCareer") String nameCareer, @Param("nivelEducativo") String nivelEducativo);
 
+    List<AspirantPostgraduate> findByLevelHigherNivelEducativoAndLevelHigherNameCareer(String nivelEducativo, String nameCareer);
+
 }

@@ -21,6 +21,5 @@ public class AspirantBasic {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "level_basic_id", referencedColumnName = "id")
     private LevelBasic levelBasic;
-
 }
 

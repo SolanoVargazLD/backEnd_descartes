@@ -21,44 +21,8 @@ public class AspirantBasicService {
         return aspirantBasicRepository.findAll();
     }
 
-    public List<?> listAspirantBasicPreescolar(){
-        List<Object[]> aspirantBasicInfoList = aspirantBasicRepository.findAspirantsWithBasicInfoPreescolar();
-        List<Map<String, Object>> aspirantBasicInfoMapList = new ArrayList<>();
-
-        for (Object[] row : aspirantBasicInfoList) {
-            Map<String, Object> aspirantBasicInfoMap = new HashMap<>();
-            aspirantBasicInfoMap.put("id_asp", row[0]);
-            aspirantBasicInfoMap.put("id", row[1]);
-            aspirantBasicInfoMap.put("tip_asp", row[2]);
-            aspirantBasicInfoMap.put("name", row[3]);
-            aspirantBasicInfoMap.put("lastNameP", row[4]);
-            aspirantBasicInfoMap.put("lastNameM", row[5]);
-            aspirantBasicInfoMap.put("curp", row[6]);
-            aspirantBasicInfoMapList.add(aspirantBasicInfoMap);
-        }
-        return aspirantBasicInfoMapList;
-    }
-
-    public List<?> listAspirantBasicPrimaria(){
-        List<Object[]> aspirantBasicInfoList = aspirantBasicRepository.findAspirantsWithBasicInfoPrimaria();
-        List<Map<String, Object>> aspirantBasicInfoMapList = new ArrayList<>();
-
-        for (Object[] row : aspirantBasicInfoList) {
-            Map<String, Object> aspirantBasicInfoMap = new HashMap<>();
-            aspirantBasicInfoMap.put("id_asp", row[0]);
-            aspirantBasicInfoMap.put("id", row[1]);
-            aspirantBasicInfoMap.put("tip_asp", row[2]);
-            aspirantBasicInfoMap.put("name", row[3]);
-            aspirantBasicInfoMap.put("lastNameP", row[4]);
-            aspirantBasicInfoMap.put("lastNameM", row[5]);
-            aspirantBasicInfoMap.put("curp", row[6]);
-            aspirantBasicInfoMapList.add(aspirantBasicInfoMap);
-        }
-        return aspirantBasicInfoMapList;
-    }
-
-    public List<?> listAspirantBasicSecundaria(){
-        List<Object[]> aspirantBasicInfoList = aspirantBasicRepository.findAspirantsWithBasicInfosecundaria();
+    public List<?> listAspirantBasicNivel(String name){
+        List<Object[]> aspirantBasicInfoList = aspirantBasicRepository.findAspirantsWithBasicNivel(name);
         List<Map<String, Object>> aspirantBasicInfoMapList = new ArrayList<>();
 
         for (Object[] row : aspirantBasicInfoList) {
@@ -112,4 +76,14 @@ public class AspirantBasicService {
         aspirantBasicRepository.deleteById(aspirantBasicOptional.get().getId());
         return ResponseEntity.noContent().build();
     }
+
+    public List<AspirantBasic> listAspirantBasicXLXS(String name){
+        return aspirantBasicRepository.findByLevelBasicName(name);
+    }
+
+    public AspirantBasic getAspirantBasicById(int id) {
+        return aspirantBasicRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("AspirantBasic not found with id: " + id));
+    }
+
 }

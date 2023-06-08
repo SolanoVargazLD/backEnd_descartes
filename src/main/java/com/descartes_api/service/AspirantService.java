@@ -76,13 +76,4 @@ public class AspirantService {
         aspirantRepository.deleteById(aspirantOptional.get().getId());
         return true;
     }
-
-    /* public ResponseEntity<Aspirant> deleteAspirantId(Integer id) {
-        Optional<Aspirant> aspirantOptional = aspirantRepository.findById(id);
-        if (!aspirantOptional.isPresent()) {
-            return ResponseEntity.unprocessableEntity().build();
-        }
-        aspirantRepository.deleteById(aspirantOptional.get().getId());
-        return ResponseEntity.noContent().build();
-    } */
 }

@@ -11,39 +11,38 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/api/descartes")
+@RequestMapping("/api/descartes/aspirantSuperior")
 public class AspirantSuperiosController {
     @Autowired
     private AspirantSuperiorService aspirantSuperiorService;
 
-    @GetMapping("/aspirantSuperior")
+    @GetMapping
     public List<AspirantSuperior> getAspirantSuperior(){
         return this.aspirantSuperiorService.listAspirantSuperior();
     }
 
-    @GetMapping("/aspirantSuperior/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<AspirantSuperior> getAspirantSuperiorId(@PathVariable Integer id){
         return this.aspirantSuperiorService.listAspirantSuperiorId(id);
     }
 
-    @GetMapping("/aspirantSuperior/licenciatura/{nameCareer}")
+    @GetMapping("/licenciatura/{nameCareer}")
     public List<?> getAspirantsByNivelEducativoAndNameCareer(@PathVariable String nameCareer) {
         return aspirantSuperiorService.findAspirantsByLevelHigherNameCareer(nameCareer);
     }
 
-
-    @PostMapping("/aspirantSuperior")
+    @PostMapping
     public ResponseEntity<AspirantSuperior> postAspirantSuperior(@RequestBody AspirantSuperior aspirantSuperior){
         AspirantSuperior aspirantSuperiorTemp= aspirantSuperiorService.saveAspirantSuperior(aspirantSuperior);
         return new ResponseEntity<>(aspirantSuperior, HttpStatus.CREATED);
     }
 
-   @PutMapping("/aspirantSuperior/{id}")
+   @PutMapping("/{id}")
    public ResponseEntity<AspirantSuperior> putAsirantSuperior(@RequestBody AspirantSuperior aspirantSuperior, @PathVariable Integer id ){
         return aspirantSuperiorService.putAspirantSuperior(aspirantSuperior, id);
    }
 
-   @DeleteMapping("/aspirantSuperior/{id}")
+   @DeleteMapping("/{id}")
     public ResponseEntity<AspirantSuperior> deleteAspirantSuperior(@PathVariable Integer id ){
         return this.aspirantSuperiorService.deleteAspirantSuperior(id);
    }

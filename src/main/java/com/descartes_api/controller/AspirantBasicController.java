@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -21,19 +22,9 @@ public class AspirantBasicController {
         return this.aspirantBasicService.listAspirantBasic();
     }
 
-    @GetMapping("/listPreescolar")
-    public List<?> getAspirantBasicPreescolar(){
-        return this.aspirantBasicService.listAspirantBasicPreescolar();
-    }
-
-    @GetMapping("/listPrimaria")
-    public List<?> getAspirantBasicPrimaria(){
-        return this.aspirantBasicService.listAspirantBasicPrimaria();
-    }
-
-    @GetMapping("/listSecundaria")
-    public List<?> getAspirantBasicSecundaria(){
-        return this.aspirantBasicService.listAspirantBasicSecundaria();
+    @GetMapping("/listNivelBasic")
+    public List<?> getAspirantBasicNivel(@RequestParam("name") String name){
+        return this.aspirantBasicService.listAspirantBasicNivel(name);
     }
 
     @GetMapping("/{id}")
@@ -56,4 +47,6 @@ public class AspirantBasicController {
     public ResponseEntity<AspirantBasic> deleteAspirantBasicId(@PathVariable Integer id){
         return aspirantBasicService.deleteAspirantBasic(id);
     }
-}
+
+
+    }

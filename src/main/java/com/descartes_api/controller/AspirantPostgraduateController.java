@@ -46,5 +46,7 @@ public class AspirantPostgraduateController {
     public ResponseEntity<AspirantPostgraduate> deleteAspirant(@PathVariable Integer id) {
         return aspirantPostgraduateService.deleteAspirantPosgraduate(id);
     }
+
+
 }
 

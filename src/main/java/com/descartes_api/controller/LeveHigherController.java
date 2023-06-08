@@ -48,7 +48,8 @@ public class LeveHigherController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<LevelHigher> deleteLevelHigher(@PathVariable Integer id){
-        return levelHigherService.deleteLevelHigher(id);
+    public ResponseEntity<Boolean> deleteLevelHigher(@PathVariable Integer id){
+        boolean deleted= levelHigherService.deleteLevelHigher(id);
+        return ResponseEntity.ok(deleted);
     }
 }

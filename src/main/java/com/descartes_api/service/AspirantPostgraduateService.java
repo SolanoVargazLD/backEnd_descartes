@@ -76,4 +76,10 @@ public class AspirantPostgraduateService {
         aspirantPostgraduateRepository.deleteById(aspirantPostgraduateOptional.get().getId());
         return ResponseEntity.noContent().build();
     }
+
+    public List<AspirantPostgraduate> listAspirantSuperiorPorPosgrado(String nivelEducativo, String nameCareer) {
+        return aspirantPostgraduateRepository.findByLevelHigherNivelEducativoAndLevelHigherNameCareer(nivelEducativo, nameCareer);
+    }
+
+
 }

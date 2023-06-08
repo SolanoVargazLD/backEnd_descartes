@@ -1,6 +1,7 @@
 package com.descartes_api.service;
 
 import com.descartes_api.model.AspirantBasic;
+import com.descartes_api.model.AspirantPostgraduate;
 import com.descartes_api.model.AspirantSuperior;
 import com.descartes_api.repository.AspirantSuperiorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +78,10 @@ public class AspirantSuperiorService {
         aspirantSuperiorRepository.deleteById(aspirantSuperiorOptional.get().getId());
         return ResponseEntity.noContent().build();
     }
+
+    public List<AspirantSuperior> listAspirantSuperiorPorProfecion(String nameCareer){
+        return aspirantSuperiorRepository.findByLevelHigherNivelEducativoAndLevelHigherNameCareer("Licenciatura", nameCareer);
+    }
+
+
 }

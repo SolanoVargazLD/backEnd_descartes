@@ -1,6 +1,7 @@
 package com.descartes_api.repository;
 
 import com.descartes_api.model.AspirantSuperior;
+import com.descartes_api.model.LevelHigher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,5 +19,8 @@ public interface AspirantSuperiorRepository extends JpaRepository<AspirantSuperi
 
     @Query("SELECT ab.id , a.id, a.tipoAspirant ,a.name, a.lastNameP, a.lastNameM, a.curp FROM AspirantSuperior ab JOIN ab.aspirant a")
     List<Object[]> findAspirantsSuperiorInfo();
+
+   //List<AspirantSuperior> findByLevelHigherNivelEducativoAndNameCareerContainingIgnoreCase(String nivelEducativo, String nameCareer);
+   List<AspirantSuperior> findByLevelHigherNivelEducativoAndLevelHigherNameCareer(String nivelEducativo, String nameCareer);
 
 }

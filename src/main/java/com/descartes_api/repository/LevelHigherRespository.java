@@ -13,6 +13,9 @@ public interface LevelHigherRespository extends JpaRepository<LevelHigher, Integ
     @Query("SELECT lh.id, lh.nameCareer FROM LevelHigher lh WHERE lh.nivelEducativo = 'licenciatura'")
     List<Object[]> findIdAndNivelEducativoByLicenciatura();
 
+    @Query("SELECT lh FROM LevelHigher lh WHERE lh.nivelEducativo = 'licenciatura'")
+    List<Object[]> findIdAndNivelEducativoByLicenciaturaSolo();
+
     @Query("SELECT lh.id, lh.nameCareer FROM LevelHigher lh WHERE lh.nivelEducativo = :nivelEducativePosgrado")
     List<Object[]> findIdAndNivelEducativoByPosgrado(@Param("nivelEducativePosgrado") String nivelEducativePosgrado);
 

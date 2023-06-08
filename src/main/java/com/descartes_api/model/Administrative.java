@@ -26,6 +26,9 @@ public class Administrative {
     @Column(name = "last_name_m", length = 75)
     private String lastNameM;
 
+    @Column(length = 150)
+    private String password;
+
     @Column(name = "email", length = 100)
     private String email;
 

@@ -74,12 +74,12 @@ public class LevelHigherService {
         return ResponseEntity.noContent().build();
     }
 
-    public ResponseEntity<LevelHigher> deleteLevelHigher(Integer id){
+    public boolean deleteLevelHigher(Integer id){
         Optional<LevelHigher> levelHigherOptional= levelHigherRespository.findById(id);
         if(!levelHigherOptional.isPresent()){
-            return ResponseEntity.unprocessableEntity().build();
+            return false;
         }
         levelHigherRespository.deleteById(levelHigherOptional.get().getId());
-        return ResponseEntity.noContent().build();
+        return true;
     }
 }
