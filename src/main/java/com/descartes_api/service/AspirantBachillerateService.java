@@ -1,6 +1,7 @@
 package com.descartes_api.service;
 
 import com.descartes_api.model.AspirantBachillerate;
+import com.descartes_api.model.AspirantBasic;
 import com.descartes_api.repository.AspirantBachillerateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +28,9 @@ public class AspirantBachillerateService {
         }
     }
 
-    public AspirantBachillerate postAspirantBachillerate(AspirantBachillerate aspirantBachillerate){
-        Optional<AspirantBachillerate> aspirantOptional= aspirantBachillerateRepository.findByAspirantId(aspirantBachillerate.getAspirant().getId());
-        if (aspirantOptional.isPresent()) {
-            return null;
-        }
-        return aspirantBachillerateRepository.save(aspirantBachillerate);
+    public Integer postAspirantBachillerate(AspirantBachillerate aspirantBachillerate){
+        AspirantBachillerate aspirantBachiller= aspirantBachillerateRepository.save(aspirantBachillerate);
+        return aspirantBachiller.getId();
     }
 
     public List<?> listAspirantBaachillerateM(){
@@ -75,5 +73,10 @@ public class AspirantBachillerateService {
         }
         aspirantBachillerateRepository.deleteById(aspirantBachillerateOptional.get().getId());
         return ResponseEntity.noContent().build();
+    }
+
+    public AspirantBachillerate getAspirantBachillerateById(int id) {
+        return aspirantBachillerateRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("AspirantBachiller not found with id: " + id));
     }
 }

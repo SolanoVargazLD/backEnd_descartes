@@ -47,12 +47,9 @@ public class AspirantSuperiorService {
         return aspirantSuperiorInfoMapList;
     }
 
-    public AspirantSuperior saveAspirantSuperior(AspirantSuperior aspirantSuperior){
-        Optional<AspirantSuperior> aspirantOptional= aspirantSuperiorRepository.findByAspirantId(aspirantSuperior.getAspirant().getId());
-        if (aspirantOptional.isPresent()) {
-            return null;
-        }
-        return aspirantSuperiorRepository.save(aspirantSuperior);
+    public Integer saveAspirantSuperior(AspirantSuperior aspirantSuperior){
+        AspirantSuperior aspirantOptional= aspirantSuperiorRepository.save(aspirantSuperior);
+        return aspirantOptional.getId();
     }
 
     public ResponseEntity<AspirantSuperior> putAspirantSuperior(AspirantSuperior aspirantSuperior, Integer id){
@@ -83,5 +80,9 @@ public class AspirantSuperiorService {
         return aspirantSuperiorRepository.findByLevelHigherNivelEducativoAndLevelHigherNameCareer("Licenciatura", nameCareer);
     }
 
+    public AspirantSuperior getAspirantBasicById(int id) {
+        return aspirantSuperiorRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("AspirantSuperior not found with id: " + id));
+    }
 
 }

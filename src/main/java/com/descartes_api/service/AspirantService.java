@@ -20,18 +20,6 @@ public class AspirantService {
         return aspirantRepository.findAll();
     }
 
-/*
-    public Aspirant saveAspirant(Aspirant aspirant) {
-        Set<FatherTutor> fatherTutors = aspirant.getFatherTutor();
-        Aspirant aspirant2 = aspirantRepository.save(aspirant);
-        for (FatherTutor fatherTutor : fatherTutors) {
-            fatherTutor.setAspirant(aspirant2);
-            fatherTutorRepository.save(fatherTutor);
-        }
-        return aspirant2;
-    }
-*/
-
     public ResponseEntity<Aspirant> listAspirantId(Integer id) {
         try {
             Aspirant aspirantTemp = aspirantRepository.findById(id).get();

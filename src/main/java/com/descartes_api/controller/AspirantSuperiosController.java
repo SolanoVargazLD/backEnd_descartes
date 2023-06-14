@@ -32,9 +32,9 @@ public class AspirantSuperiosController {
     }
 
     @PostMapping
-    public ResponseEntity<AspirantSuperior> postAspirantSuperior(@RequestBody AspirantSuperior aspirantSuperior){
-        AspirantSuperior aspirantSuperiorTemp= aspirantSuperiorService.saveAspirantSuperior(aspirantSuperior);
-        return new ResponseEntity<>(aspirantSuperior, HttpStatus.CREATED);
+    public ResponseEntity<Integer> postAspirantSuperior(@RequestBody AspirantSuperior aspirantSuperior){
+        Integer aspirantSuperiorTemp= aspirantSuperiorService.saveAspirantSuperior(aspirantSuperior);
+        return new ResponseEntity<>(aspirantSuperiorTemp, HttpStatus.CREATED);
     }
 
    @PutMapping("/{id}")

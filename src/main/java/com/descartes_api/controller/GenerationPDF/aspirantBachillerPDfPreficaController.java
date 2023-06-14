@@ -1,7 +1,9 @@
 package com.descartes_api.controller.GenerationPDF;
 
+import com.descartes_api.model.AspirantBachillerate;
 import com.descartes_api.model.AspirantBasic;
 import com.descartes_api.model.FatherTutor;
+import com.descartes_api.service.AspirantBachillerateService;
 import com.descartes_api.service.AspirantBasicService;
 import com.lowagie.text.DocumentException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -23,31 +25,32 @@ import java.time.format.DateTimeFormatter;
 
 @Controller
 @CrossOrigin
-@RequestMapping(value ="/api/descartes/aspirantBasic")
-public class aspirantBasicPDfPreficaController {
+@RequestMapping(value ="/api/descartes/aspirantBachillerate")
+public class aspirantBachillerPDfPreficaController {
 
     @Autowired
-    private AspirantBasicService aspirantBasicService;
+    private AspirantBachillerateService aspirantBachillerateService;
 
     private final TemplateEngine templateEngine;
 
     @Autowired
-    public aspirantBasicPDfPreficaController(TemplateEngine templateEngine) {
+    public aspirantBachillerPDfPreficaController(TemplateEngine templateEngine) {
         this.templateEngine = templateEngine;
     }
     @GetMapping("/prefichaPDF")
     public void download(HttpServletResponse response, @RequestParam("aspirantB") int aspirantB) throws IOException, DocumentException {
         // Obtener los datos del aspirante
-        AspirantBasic aspirantBasic = aspirantBasicService.getAspirantBasicById(aspirantB);
-        String nameC = aspirantBasic.getAspirant().getName() + " " + aspirantBasic.getAspirant().getLastNameP() + " " + aspirantBasic.getAspirant().getLastNameM();
-        String curp = aspirantBasic.getAspirant().getCurp();
-        String nivel = aspirantBasic.getLevelBasic().getName();
+        AspirantBachillerate aspirantBachillerate = aspirantBachillerateService.getAspirantBachillerateById(aspirantB);
+        String nameC = aspirantBachillerate.getAspirant().getName() + " " + aspirantBachillerate.getAspirant().getLastNameP() + " " + aspirantBachillerate.getAspirant().getLastNameM();
+        String curp = aspirantBachillerate.getAspirant().getCurp();
+        String phoneAspirant= aspirantBachillerate.getPhone();
+        String emailAspirant= aspirantBachillerate.getEmail();
         String namePT = "";
         String email = "";
         String telefono1 = "";
 
         boolean isFirstIteration = true;
-        for (FatherTutor fatherTutor : aspirantBasic.getAspirant().getFatherTutor()) {
+        for (FatherTutor fatherTutor : aspirantBachillerate.getAspirant().getFatherTutor()) {
             if (isFirstIteration) {
                 namePT = fatherTutor.getName() + " " + fatherTutor.getLastNameP() + " " + fatherTutor.getLastNameM();
                 email = fatherTutor.getEmail();
@@ -59,14 +62,14 @@ public class aspirantBasicPDfPreficaController {
         }
 
         // Generar el HTML para la plantilla
-        String html = generateHtmlFromTemplate(nameC, curp, nivel, namePT, email, telefono1);
+        String html = generateHtmlFromTemplate(nameC, curp, phoneAspirant, emailAspirant, namePT, email, telefono1);
 
         // Generar el archivo PDF
         ByteArrayOutputStream pdfBaos = generateVoucherDocumentBaos(html);
 
         // Configurar la respuesta HTTP para la descarga del archivo PDF
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", ""+aspirantBasic.getAspirant().getLastNameP()+aspirantBasic.getAspirant().getLastNameM()+"_"+nivel+".pdf"));
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", ""+aspirantBachillerate.getAspirant().getLastNameP()+aspirantBachillerate.getAspirant().getLastNameM()+"_Bachillerato.pdf"));
         response.setContentLength(pdfBaos.size());
 
         // Copiar los datos del PDF al flujo de salida de la respuesta HTTP
@@ -76,7 +79,7 @@ public class aspirantBasicPDfPreficaController {
         outputStream.close();
     }
 
-    public String generateHtmlFromTemplate(String nameC, String curp, String nivel, String namePT, String email, String telefono1) {
+    public String generateHtmlFromTemplate(String nameC, String curp, String phoneAspirant, String emailAspirant, String namePT, String email, String telefono1) {
         LocalDate fechaActual = LocalDate.now();
 
         // Crear el formateador de fecha
@@ -89,12 +92,13 @@ public class aspirantBasicPDfPreficaController {
         Context context = new Context();
         context.setVariable("nameC", nameC);
         context.setVariable("curp", curp);
-        context.setVariable("nivel", nivel);
+        context.setVariable("phoneAspirant", phoneAspirant);
+        context.setVariable("emailAspirant", emailAspirant);
         context.setVariable("namePT", namePT);
         context.setVariable("email", email);
         context.setVariable("telefono1", telefono1);
         context.setVariable("fechaFormateada", fechaFormateada);
-        return templateEngine.process("prefichaBasic", context);
+        return templateEngine.process("prefichaBachiller", context);
     }
 
     public ByteArrayOutputStream generateVoucherDocumentBaos(String html) throws IOException, DocumentException {

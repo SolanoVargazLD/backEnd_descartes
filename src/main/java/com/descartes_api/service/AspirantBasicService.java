@@ -48,12 +48,9 @@ public class AspirantBasicService {
         }
     }
 
-    public AspirantBasic saveAspirantBasic(AspirantBasic aspirantBasic)  {
-        Optional<AspirantBasic> aspirantOptional= aspirantBasicRepository.findByAspirantId(aspirantBasic.getAspirant().getId());
-        if (aspirantOptional.isPresent()) {
-            return null;
-        }
-            return aspirantBasicRepository.save(aspirantBasic);
+    public Integer saveAspirantBasic(AspirantBasic aspirantBasic)  {
+        AspirantBasic savedAspirantBasic = aspirantBasicRepository.save(aspirantBasic);
+        return savedAspirantBasic.getId(); // Retorna el ID del AspirantBasic guardado
     }
 
     public ResponseEntity<AspirantBasic> putAspirantBasic(AspirantBasic aspirantBasic, Integer id){
@@ -85,5 +82,4 @@ public class AspirantBasicService {
         return aspirantBasicRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("AspirantBasic not found with id: " + id));
     }
-
 }

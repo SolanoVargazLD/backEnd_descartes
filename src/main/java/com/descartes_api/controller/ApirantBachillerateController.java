@@ -31,10 +31,11 @@ public class ApirantBachillerateController {
         return aspirantBachillerateService.listAspirantBachillerateId(id);
     }
 
+
     @PostMapping
-    public ResponseEntity<AspirantBachillerate> postAspirantBachillerate(@RequestBody AspirantBachillerate aspirantBachillerate){
-        AspirantBachillerate aspirantBachillerateTemp= aspirantBachillerateService.postAspirantBachillerate(aspirantBachillerate);
-        return new ResponseEntity<>(aspirantBachillerateTemp, HttpStatus.CREATED);
+    public ResponseEntity<Integer> postAspirantBachillerate(@RequestBody AspirantBachillerate aspirantBachillerate){
+        Integer savedAspirantBachillerId = aspirantBachillerateService.postAspirantBachillerate(aspirantBachillerate);
+        return new ResponseEntity<>(savedAspirantBachillerId, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

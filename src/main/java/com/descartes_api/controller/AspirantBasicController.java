@@ -33,9 +33,9 @@ public class AspirantBasicController {
     }
 
     @PostMapping
-    public ResponseEntity<AspirantBasic> postAspirantBasicId(@RequestBody AspirantBasic aspirantBasic){
-        AspirantBasic aspirantBasicTemp = aspirantBasicService.saveAspirantBasic(aspirantBasic);
-        return new ResponseEntity<>(aspirantBasicTemp, HttpStatus.CREATED);
+    public ResponseEntity<Integer> postAspirantBasicId(@RequestBody AspirantBasic aspirantBasic){
+        Integer savedAspirantBasicId = aspirantBasicService.saveAspirantBasic(aspirantBasic);
+        return new ResponseEntity<>(savedAspirantBasicId, HttpStatus.CREATED); // Retorna el ID del AspirantBasic guardado
     }
 
     @PutMapping("/{id}")
