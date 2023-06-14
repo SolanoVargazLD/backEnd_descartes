@@ -32,8 +32,8 @@ public class AspirantPostgraduateController {
     }
 
     @PostMapping
-    public ResponseEntity<AspirantPostgraduate> postAspirantPostgraduate(@RequestBody AspirantPostgraduate aspirantPostgraduate){
-        AspirantPostgraduate aspirantPostgraduateTemp= aspirantPostgraduateService.saveAspirantPosgraduate(aspirantPostgraduate);
+    public ResponseEntity<Integer> postAspirantPostgraduate(@RequestBody AspirantPostgraduate aspirantPostgraduate){
+        Integer aspirantPostgraduateTemp= aspirantPostgraduateService.saveAspirantPosgraduate(aspirantPostgraduate);
         return new ResponseEntity<>(aspirantPostgraduateTemp, HttpStatus.CREATED);
     }
 

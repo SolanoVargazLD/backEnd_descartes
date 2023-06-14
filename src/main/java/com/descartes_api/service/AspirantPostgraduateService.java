@@ -1,6 +1,7 @@
 package com.descartes_api.service;
 
 import com.descartes_api.model.AspirantPostgraduate;
+import com.descartes_api.model.AspirantSuperior;
 import com.descartes_api.repository.AspirantPostgraduateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +28,9 @@ public class AspirantPostgraduateService {
         }
     }
 
-    public AspirantPostgraduate saveAspirantPosgraduate(AspirantPostgraduate aspirantPostgraduate) {
-        Optional<AspirantPostgraduate> aspirantOptional= aspirantPostgraduateRepository.findByAspirantId(aspirantPostgraduate.getAspirant().getId());
-        if (aspirantOptional.isPresent()) {
-            return null;
-        }
-        return aspirantPostgraduateRepository.save(aspirantPostgraduate);
+    public Integer saveAspirantPosgraduate(AspirantPostgraduate aspirantPostgraduate) {
+        AspirantPostgraduate aspirantOptional= aspirantPostgraduateRepository.save(aspirantPostgraduate);
+        return aspirantOptional.getId();
     }
 
     public List<?> findAspirantsByLevelHigherNameCareer(String nameCareer, String nivelEducativo) {
@@ -81,5 +79,9 @@ public class AspirantPostgraduateService {
         return aspirantPostgraduateRepository.findByLevelHigherNivelEducativoAndLevelHigherNameCareer(nivelEducativo, nameCareer);
     }
 
+    public AspirantPostgraduate getAspirantPosgradoById(int id) {
+        return aspirantPostgraduateRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("AspirantSuperior not found with id: " + id));
+    }
 
 }
